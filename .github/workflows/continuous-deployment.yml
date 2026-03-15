@@ -36,9 +36,9 @@ jobs:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
         docker build -f ./dvn-workshop-apps/backend/YoutubeLiveApp/Dockerfile \
-            -t $REGISTRY/$REPOSITORY:$IMAGE_TAG \
+            -t $REGISTRY/$BACKEND_REPOSITORY:$IMAGE_TAG \
             ./dvn-workshop-apps/backend/YoutubeLiveApp
-        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        docker push $REGISTRY/$BACKEND_REPOSITORY:$IMAGE_TAG
 
     - uses: actions/checkout@v6
       with:
@@ -46,9 +46,9 @@ jobs:
         token: ${{ secrets.PAT }}
 
     - run: |
-        kustomize edit set image $REGISTRY/$REPOSITORY=$REGISTRY/$REPOSITORY:$IMAGE_TAG
+        kustomize edit set image $REGISTRY/$BACKEND_REPOSITORY=$REGISTRY/$BACKEND_REPOSITORY:$IMAGE_TAG
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git add ./kustomization.yml
-        git commit -m "[BOT] Changing image to $REGISTRY/$REPOSITORY:$IMAGE_TAG"
+        git commit -m "[BOT] Changing image to $REGISTRY/$BACKEND_REPOSITORY:$IMAGE_TAG"
         git push
