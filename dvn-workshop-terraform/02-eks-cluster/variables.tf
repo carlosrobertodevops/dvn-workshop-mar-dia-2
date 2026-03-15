@@ -13,7 +13,12 @@ variable "assume_role" {
   })
 
   default = {
-    arn    = "<YOUR_ROLE>"
+    arn    = "arn:aws:iam::654654554686:role/workshop-march-role"
     region = "us-east-1"
   }
+}
+
+variable "ecr_repositories" {
+  type = list(string)
+  default = [ "workshop/production/frontend", "workshop/production/backend" ]
 }

@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket       = "<YOUR_BUCKET>"
+    bucket       = "workshop-march-remote-backend-bucket"
     key          = "eks-cluster/terraform.tfstate"
     region       = "us-east-1"
     use_lockfile = true
